@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class StuGrade {
 
-    private String stuNumber, courseName, score, stuName;
+    private String stuNumber, courceName, score, stuName;
 
     void getInput() {
         Scanner sc = new Scanner(System.in);
@@ -15,7 +15,7 @@ public class StuGrade {
         System.out.print("请输入学号:");
         stuNumber = sc.next();
         System.out.print("\n请输入课程名:");
-        courseName = sc.next();
+        courceName = sc.next();
         System.out.print("\n请输入成绩:");
         score = sc.next();
     }
@@ -27,14 +27,14 @@ public class StuGrade {
         // 课程信息录入
         if (stuNumber.length() == 0) {
             System.out.println("学生学号不能为空");
-        } else if (courseName.length() == 0) {
+        } else if (courceName.length() == 0) {
             System.out.println("课程名称不能为空");
         } else if (score.length() == 0) {
             System.out.println("成绩不能为空");
         }else  {
         try {
-            if (0 < con.getUpdate("insert into tb_score (stuNumber,courseName,score) values ('"
-                    + stuNumber + "','" + courseName + "','" + score + "')")) {
+            if (0 < con.getUpdate("insert into tb_score (stuNumber,courceName,score) values ('"
+                    + stuNumber + "','" + courceName + "','" + score + "')")) {
                 System.out.println("课程信息录入成功");
             } else {
                 System.err.printf("修改 tb_score 表中 stuNumber = %d 的记录失败\n", stuNumber);
@@ -50,20 +50,16 @@ public class StuGrade {
         int choose;
         System.out.println("学生成绩查询");
         System.out.println("1:按学号查询:");
-        System.out.println("2:按学院查询:");
-        System.out.println("3:按班级查询:");
+        System.out.println("2:按课程查询:");
         choose = sc.nextInt();
         System.out.println("请输入查询条件:");
         String query = sc.next();
         switch (choose) {
             case 1:
-                Query("stustuNumber", query);
+                Query("stuNumber", query);
                 break;
             case 2:
-                Query("stucourseName", query);
-                break;
-            case 3:
-                Query("stuDepart", query);
+                Query("courceName", query);
                 break;
         }
         return 0;
@@ -83,10 +79,9 @@ public class StuGrade {
             ResultSet rs = con.getRs(sql);
             while (rs.next()) {
                 stuNumber = rs.getString("stuNumber");
-                courseName = rs.getString("courseName");
+                courceName = rs.getString("courceName");
                 score = rs.getString("score");
-                stuName = rs.getString("stuName");
-                System.out.println(stuNumber + "\t" + courseName + "\t" + score + "\t" + stuName);
+                System.out.println(stuNumber + "\t" + courceName + "\t" + score + "\t" );
             }
             rs.close();
         } catch (Exception e) {
@@ -99,7 +94,7 @@ public class StuGrade {
         dbConn con = new dbConn();
         getInput();
         try {
-            if (0 < con.getUpdate("update tb_score set stuNumber = '" + stuNumber + "', courseName = '" + courseName
+            if (0 < con.getUpdate("update tb_score set stuNumber = '" + stuNumber + "', courceName = '" + courceName
                     + "', score = '" + score
                     + "' where stuNumber = '" + stuNumber + "'")) {
                 System.out.println("学生信息修改成功！");
@@ -114,29 +109,29 @@ public class StuGrade {
     void InC() {
         // 异常判断
         dbConn con = new dbConn();
-
+        getInput();
         if (stuNumber.length() == 0) {
             System.out.println("学生学号不能为空");
-        } else if (courseName.length() == 0) {
+        } else if (courceName.length() == 0) {
             System.out.println("课程名称不能为空");
         } else if (score.length() == 0) {
             System.out.println("成绩不能为空");
         } else {
             try {
-                boolean courseNameExit = false;
-                ResultSet rs = con.getRs("select stustuNumber from tb_score where courcecourseName='"
-                        + courseName);
+                boolean courceNameExzist = false;
+                ResultSet rs = con.getRs("select stuNumber from tb_score where courceName='"
+                        + courceName+"'");
                 while (rs.next()) {
-                    if (stuNumber.trim().equals(rs.getString("stustuNumber").trim())) {
-                        courseNameExit = true;
+                    if (stuNumber.trim().equals(rs.getString("stuNumber").trim())) {
+                        courceNameExzist = true;
                     }
                 }
-                if (courseNameExit) {
+                if (courceNameExzist) {
                     System.out.println("课程名称已经存在！");
                 } else {
-                    con.getUpdate("insert into tb_score (stustuNumber,score,courcecourseName) values ('"
+                    con.getUpdate("insert into tb_score (stuNumber,score,courceName) values ('"
                             + stuNumber.trim() + "','" + score.trim() + "','"
-                            + courseName.trim() + "')");
+                            + courceName.trim() + "')");
                     System.out.println("课程信息提交成功！");
                 }
                 rs.close();

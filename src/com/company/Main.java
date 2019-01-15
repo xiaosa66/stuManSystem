@@ -22,10 +22,10 @@ class DisplayServers {
         System.out.println("2、信息浏览:");
         System.out.println("3、信息查询:");
         System.out.println("4、信息修改:");
-//        System.out.println("5、成绩录入:");
-//        System.out.println("6、成绩浏览:");
-//        System.out.println("7、成绩查询:");
-//        System.out.println("8、信息修改:");
+        System.out.println("5、成绩录入:");
+        System.out.println("6、成绩浏览:");
+        System.out.println("7、成绩查询:");
+        System.out.println("8、成绩修改:");
         System.out.println("9、退出登录:");
         return sc.nextInt();
     }
@@ -36,30 +36,35 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("欢迎来到北京联合大学学生信息管理系统");
         DisplayServers display = new DisplayServers();
-        StuInfo stu = new StuInfo();
+        StuInfo info = new StuInfo();
+        StuGrade grade = new StuGrade();
         boolean logined = false;
         while (true) {
             if (logined) {
                 switch (display.Menu()) {
                     case 1:
-                        stu.EntryInformation();
+                        info.EntryInformation();
                         break;
                     case 2:
 
                     case 3:
-                        stu.BrowseInfomation();
+                        info.BrowseInfomation();
                         break;
                     case 4:
-                        stu.Update();
+                        info.Update();
                         break;
-//                    case 5:
-//                        break;
-//                    case 6:
-//                        break;
-//                    case 7:
-//                        break;
-//                    case 8:
-//                        break;
+                    case 5:
+                        grade.EntryGrade();
+                        break;
+                    case 6:
+                        grade.BrowseGrade();
+                        break;
+                    case 7:
+                        grade.BrowseGrade();
+                        break;
+                    case 8:
+                        grade.InC();
+                        break;
                     case 9:
                         logined = false;
                         break;
