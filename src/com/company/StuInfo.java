@@ -78,7 +78,6 @@ public class StuInfo {
 
     // 查询
     void Query(String type, String query) {
-        dbConn con = new dbConn();
         String sql;
         if (!query.trim().equals("")) {
             sql = "select * from tb_student where " + type + "='" + query.trim() + "'";
@@ -86,21 +85,25 @@ public class StuInfo {
             System.out.println("请输入正确的查询条件！");
             return;
         }
+        QuerySQL(sql);
+    }
+
+    void QuerySQL(String SQL) {
+        dbConn con = new dbConn();
         try {
-            ResultSet rs = con.getRs(sql);
+            ResultSet rs = con.getRs(SQL);
             while (rs.next()) {
                 number = rs.getString("stuNumber");
                 name = rs.getString("stuName");
                 sdepart = rs.getString("stuDepart");
                 sspec = rs.getString("stuSpec");
                 sclass = rs.getString("stuClass");
-                System.out.println(number + "\t" + name + "\t" + sdepart + "\t" + sspec + "\t" + sclass);
+                System.out.println(number + "\t\t\t\t" + name + "\t\t\t\t" + sdepart + "\t\t\t\t" + sspec + "\t\t\t\t" + sclass);
             }
             rs.close();
         } catch (Exception e) {
             System.out.println(e);
         }
-
     }
 
     void Update() {

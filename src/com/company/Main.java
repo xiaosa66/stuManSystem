@@ -46,7 +46,8 @@ public class Main {
                         info.EntryInformation();
                         break;
                     case 2:
-
+                        info.QuerySQL("select * from tb_student");
+                        break;
                     case 3:
                         info.BrowseInfomation();
                         break;
@@ -57,10 +58,11 @@ public class Main {
                         grade.EntryGrade();
                         break;
                     case 6:
-                        grade.BrowseGrade();
+                        grade.QuerySQL("select * from tb_score order by score desc",false);
+                        grade.calcueateGrade();
                         break;
                     case 7:
-                        grade.BrowseGrade();
+                        grade.QueryGrade();
                         break;
                     case 8:
                         grade.InC();
