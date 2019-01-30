@@ -4,8 +4,6 @@
 
 学生信息管理，包括学生、班级、院系、课程、成绩等的管理。
 
-本程序仅供学习食用。（¯﹃¯）
-
 ## 工程环境
 
 * [JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
@@ -29,14 +27,3 @@
 **注意**：注册，默认注册普通用户（`userType = 2`），普通用户无添加用户、删除用户功能；要添加管理员账号（`userType = 1`）必须在数据库添加。
 2. `DumpStructure_and_Data.sql`数据库的`tb_user`表中有学生系统管理员账号：`admin`，密码为空，可以用其登录测试。
 
-## 运行截图
-
-![stuManagerScreenshot](https://huihut-img.oss-cn-shenzhen.aliyuncs.com/stuManageScreenshot.jpg)
-
-## 系统功能结构
-
-![SystemFunctionStructure](https://huihut-img.oss-cn-shenzhen.aliyuncs.com/SystemFunctionStructure.jpg)
-
-## 数据库结构（E-R图）
-
-![DatabaseStructure](https://huihut-img.oss-cn-shenzhen.aliyuncs.com/DatabaseERDiagram.png)
